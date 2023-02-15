@@ -29,7 +29,7 @@ export class AppComponent {
     }).then(response => {
       response.json().then(_ => {
         try{
-          this.poem = _.choices[0].text;
+          this.poem = this.sanitizePoem(_.choices[0].text);
         }
         catch (e){
           this.poem = `Došlo k chybe pri skladaní básne. Umelá inteligencia môže byť práve príliš vyťažená, skús to prosím o chvíľku neskôr.`;
@@ -38,5 +38,9 @@ export class AppComponent {
         this.poemLoaded = true;
       });
     });
+  }
+
+  private sanitizePoem(poem: string): string {
+    return poem.substr(0, poem.lastIndexOf(".")+1);
   }
 }
