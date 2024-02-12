@@ -1,0 +1,22 @@
+// See https://containers.dev/implementors/json_reference/ for configuration reference
+{
+	"name": "Angular",
+	"image": "mcr.microsoft.com/devcontainers/typescript-node:18-bullseye",
+	"remoteUser": "node",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"Angular.ng-template",
+				"gkalpak.aio-docs-utils",
+				"ms-vscode.vscode-typescript-next",
+				"YoavBls.pretty-ts-errors"
+			]
+		}
+	},
+	"postStartCommand": "npm install",
+	"runArgs": [
+		"--network=host"
+	],
+}
+

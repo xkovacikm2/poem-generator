@@ -18,6 +18,15 @@
     <pre *ngIf="poemLoaded">{{poem}}</pre>
   </div>
 
+  <div class="terminal">
+    <pre *ngIf="!imageLoading || !imageLoaded">Tu ťa skúsim nakresliť podľa básne.</pre>
+    <div class="centered loading" *ngIf="imageLoading">
+      <img width="50" height="50" src="https://cdn-icons-png.flaticon.com/512/3305/3305803.png" class="rotating"/>
+    </div>
+    <div class="centered" *ngIf="imageLoaded">
+      <img width="512" height="512" [src]="imageUrl"/>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer>

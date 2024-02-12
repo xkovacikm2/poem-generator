@@ -10,12 +10,16 @@ image:
   tag: "latest"
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
 
-autoscaling:
-  enabled: false
 ingress:
+  enabled: true
+  host: janulka.kovko.top
+  className: nginx
+  annotations: {}
+
+autoscaling:
   enabled: false
 imagePullSecrets: []
 podAnnotations: {}
