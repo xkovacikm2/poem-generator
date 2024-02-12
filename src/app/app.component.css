@@ -7,6 +7,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.image-container {
+  overflow-x: scroll;
+}
+
 h1,
 h2,
 h3,

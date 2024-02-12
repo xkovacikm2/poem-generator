@@ -23,7 +23,7 @@
     <div class="centered loading" *ngIf="imageLoading">
       <img width="50" height="50" src="https://cdn-icons-png.flaticon.com/512/3305/3305803.png" class="rotating"/>
     </div>
-    <div class="centered" *ngIf="imageLoaded">
+    <div class="centered image-container" *ngIf="imageLoaded">
       <img width="512" height="512" [src]="imageUrl"/>
     </div>
   </div>
