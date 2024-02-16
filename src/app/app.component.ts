@@ -12,6 +12,8 @@ export class AppComponent {
   imageLoaded: boolean = false;
   apiKey: string = '${API_KEY}';
   imageUrl: string = ""
+  audio: HTMLAudioElement | null = null;
+  audioLoaded: boolean = false;
 
   getPoem() {
     this.poemLoaded = false;
@@ -38,6 +40,7 @@ export class AppComponent {
         try {
           this.poem = this.sanitizePoem(_.choices[0].message.content);
           this.getImage();
+          this.getVoice();
         }
         catch (e) {
           this.poem = `Došlo k chybe pri skladaní básne. Umelá inteligencia môže byť práve príliš vyťažená, skús to prosím o chvíľku neskôr.`;
@@ -75,6 +78,35 @@ export class AppComponent {
         }
       });
     });
+  }
+
+  getVoice() {
+    const endpoint = 'https://api.openai.com/v1/audio/speech';
+    const response = fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.apiKey}`
+      },
+      body: JSON.stringify({
+        input: this.poem,
+        voice: "onyx",
+        model: "tts-1"
+      })
+    }).then(response => {
+      response.blob()
+      .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        this.audio = new Audio(url);
+        this.playAudio();
+      })
+    });
+  }
+
+  playAudio() {
+    if (this.audio) {
+      this.audio.play();
+    }
   }
 
   private sanitizePoem(poem: string): string {
